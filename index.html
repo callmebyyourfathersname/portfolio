@@ -1,0 +1,306 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>John Romar Francisco</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow left-aligned column; mono labels in a left rail, content on the right.
+   Single bold move: the hero name sits in an object-detection bounding box with a confidence tag. */
+:root {
+  --bg: #FBFBFC;
+  --fg: #14171C;
+  --muted: #5F6672;
+  --line: #E3E6EA;
+  --accent: #0B7A5E;
+  --accent-soft: #E6F3EE;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1215; --fg: #E8EBEE; --muted: #9099A5; --line: #232930;
+    --accent: #5FD8AC; --accent-soft: #14241F; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1215; --fg: #E8EBEE; --muted: #9099A5; --line: #232930;
+  --accent: #5FD8AC; --accent-soft: #14241F; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  padding-block: 28px 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+/* top bar */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.top nav { display: flex; gap: 20px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .04em; }
+.top nav a { text-decoration: none; color: var(--muted); padding: 4px 0; }
+.top nav a:hover { color: var(--fg); }
+.mark { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .04em; color: var(--muted); }
+.toggle {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em;
+  background: none; color: var(--muted); border: 1px solid var(--line);
+  padding: 4px 10px; border-radius: 3px; cursor: pointer;
+}
+.toggle:hover { color: var(--fg); border-color: var(--muted); }
+
+/* hero */
+.hero { padding-block: 88px 72px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 40px; }
+.hero-text { flex: 1 1 380px; min-width: 0; }
+.photo { margin: 0; flex: 0 0 auto; width: 176px; max-width: 100%; aspect-ratio: 4 / 5; position: relative; border: 1px solid var(--line); background: var(--accent-soft); overflow: hidden; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo .initials { display: none; position: absolute; inset: 0; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 2.2rem; letter-spacing: .06em; color: var(--accent); }
+.photo.empty img { display: none; }
+.photo.empty .initials { display: flex; }
+.detect { position: relative; display: inline-block; border: 1.5px solid var(--accent); padding: 22px 26px 22px; max-width: 100%; }
+.detect .tag {
+  position: absolute; left: -1.5px; top: 0; transform: translateY(-100%);
+  background: var(--accent); color: var(--bg);
+  font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .03em;
+  padding: 2px 8px; white-space: nowrap;
+}
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 7vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -.025em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+.role { margin: 28px 0 0; font-size: 1.15rem; color: var(--fg); max-width: 34ch; text-wrap: balance; }
+.meta { margin: 14px 0 0; font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); letter-spacing: .02em; }
+.cta { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-block; text-decoration: none; font-size: 14.5px; font-weight: 500;
+  padding: 9px 18px; border: 1px solid var(--fg); border-radius: 3px;
+}
+.btn.solid { background: var(--fg); color: var(--bg); }
+.btn.solid:hover { background: var(--accent); border-color: var(--accent); }
+.btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* sections */
+section { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 12px 32px; padding-block: 40px; border-top: 1px solid var(--line); }
+.label { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
+section p { margin: 0; max-width: 62ch; }
+section p + p { margin-top: 14px; }
+
+.item + .item { margin-top: 32px; }
+.item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.item h3 { margin: 0; font-size: 1.1rem; font-weight: 600; letter-spacing: -.01em; }
+.item .when { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
+.item ul { margin: 10px 0 0; padding-left: 18px; color: var(--fg); max-width: 62ch; }
+.item li + li { margin-top: 6px; }
+.item li::marker { color: var(--accent); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.chip {
+  font-family: var(--font-mono); font-size: 12px; padding: 2px 9px;
+  border: 1px solid var(--line); border-radius: 3px; color: var(--muted);
+}
+
+.rows { display: grid; gap: 0; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; padding-block: 10px; border-bottom: 1px solid var(--line); }
+.row:first-child { padding-top: 0; }
+.row:last-child { border-bottom: 0; padding-bottom: 0; }
+.row .yr { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.skills { display: grid; gap: 14px; margin: 0; }
+.skills div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 4px 20px; }
+.skills dt { font-weight: 600; font-size: 14.5px; }
+.skills dd { margin: 0; color: var(--muted); font-size: 15px; }
+
+.email-line { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.email-line code { font-family: var(--font-mono); font-size: 15px; word-break: break-all; }
+.copy { font-family: var(--font-mono); font-size: 12px; background: none; color: var(--accent); border: 1px solid var(--accent); padding: 3px 10px; border-radius: 3px; cursor: pointer; }
+.copy:hover { background: var(--accent-soft); }
+
+footer { border-top: 1px solid var(--line); padding-top: 24px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 640px) {
+  section { grid-template-columns: minmax(0, 1fr); padding-block: 32px; gap: 14px; }
+  .skills div { grid-template-columns: minmax(0, 1fr); }
+  .hero { padding-block: 64px 56px; }
+  .detect { padding: 18px 18px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<div class="wrap" id="top">
+  <header class="top">
+    <span class="mark">jrz.francisco</span>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="toggle" id="themeBtn" type="button" aria-label="Toggle color theme">theme</button>
+  </header>
+
+  <div class="hero">
+   <div class="hero-text">
+    <div class="detect">
+      <span class="tag">developer 0.97</span>
+      <h1>John Romar<br>Z. Francisco</h1>
+    </div>
+    <p class="role">Web and mobile developer with a focus on applied AI and computer vision.</p>
+    <p class="meta">4th-year IT student · FEU Institute of Technology · Manila</p>
+    <div class="cta">
+      <a class="btn solid" href="#projects">View projects</a>
+      <a class="btn ghost" href="#contact">Get in touch</a>
+    </div>
+   </div>
+   <figure class="photo" id="photoBox">
+     <img id="photoImg" src="photo.jpg" alt="Portrait of John Romar Francisco" width="176" height="220">
+     <span class="initials" aria-hidden="true">JF</span>
+   </figure>
+  </div>
+
+  <section id="about">
+    <div class="label">About</div>
+    <div>
+      <p>I'm a 4th-year Information Technology student specializing in web and mobile application development. I like building things that put computer vision to practical use, from a literacy app that recognizes objects to a system that spots trash.</p>
+      <p>I'm looking for an internship where I can work on web, mobile or applied AI projects and keep learning from a real team.</p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="label">Projects</div>
+    <div>
+      <article class="item">
+        <div class="item-head"><h3>iSpyWorld</h3><span class="when">Mobile learning app</span></div>
+        <ul>
+          <li>Developed a mobile learning app aimed at improving literacy.</li>
+          <li>Integrated YOLOv11n object detection (via Ultralytics) and speech coaching as the core learning features.</li>
+        </ul>
+        <div class="chips"><span class="chip">YOLOv11n</span><span class="chip">Ultralytics</span><span class="chip">Python</span><span class="chip">Speech coaching</span></div>
+      </article>
+      <article class="item">
+        <div class="item-head"><h3>WasteWatch</h3><span class="when">Smart waste monitoring</span></div>
+        <ul>
+          <li>Developed a smart waste monitoring system in C++ with trash detection.</li>
+          <li>Implemented cloud reporting to log and review monitoring results.</li>
+        </ul>
+        <div class="chips"><span class="chip">C++</span><span class="chip">Trash detection</span><span class="chip">Cloud reporting</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="label">Skills</div>
+    <dl class="skills">
+      <div><dt>Languages</dt><dd>HTML, CSS, Python, JavaScript, PHP, Java, Kotlin, C++</dd></div>
+      <div><dt>AI &amp; vision</dt><dd>YOLOv11n, Ultralytics, Python</dd></div>
+      <div><dt>Frameworks</dt><dd>Laravel, CodeIgniter</dd></div>
+      <div><dt>Databases</dt><dd>MySQL, SQL, Supabase</dd></div>
+      <div><dt>Hosting</dt><dd>Railway, cPanel, GitHub Pages</dd></div>
+      <div><dt>Tools</dt><dd>Git, GitHub, Figma, Visual Studio Code, Android Studio</dd></div>
+      <div><dt>Spoken</dt><dd>Filipino, Ilocano, English</dd></div>
+    </dl>
+  </section>
+
+  <section id="credentials">
+    <div class="label">Credentials</div>
+    <div>
+      <div class="item">
+        <h3>Certifications</h3>
+        <div class="rows" style="margin-top:14px">
+          <div class="row"><span>CCNA: Introduction to Networks</span><span class="yr">2025</span></div>
+          <div class="row"><span>Cisco Certified Support Technician, Networking</span><span class="yr">2025</span></div>
+          <div class="row"><span>Information Technology Specialist in Python</span><span class="yr">2025</span></div>
+          <div class="row"><span>PMI Project Management Ready</span><span class="yr">2026</span></div>
+        </div>
+      </div>
+      <div class="item">
+        <h3>Education</h3>
+        <div class="rows" style="margin-top:14px">
+          <div class="row"><span>BS in Information Technology, Web and Mobile Application<br><span style="color:var(--muted);font-size:14.5px">FEU Institute of Technology, Manila</span></span><span class="yr">Exp. 2027</span></div>
+        </div>
+      </div>
+      <div class="item">
+        <h3>Activities</h3>
+        <div class="rows" style="margin-top:14px">
+          <div class="row"><span>Member, Alliance of Information Technology Students</span><span class="yr">2024 – now</span></div>
+          <div class="row"><span>Participant, FEU Tech x OpenAI Campus Launch</span><span class="yr"></span></div>
+          <div class="row"><span>Participant, Build Your Cloud Arsenal: A Deep Dive into GCP Compute Services</span><span class="yr"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="label">Contact</div>
+    <div>
+      <p>Open to internship opportunities. The fastest way to reach me is email.</p>
+      <div class="email-line" style="margin-top:16px">
+        <code id="email">romar.zaratan@gmail.com</code>
+        <button class="copy" id="copyBtn" type="button">copy</button>
+      </div>
+      <p class="meta" style="margin-top:14px">Pasay City, Metro Manila, Philippines</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 John Romar Z. Francisco</span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById('themeBtn');
+  function systemDark() { return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
+  function current() { return root.getAttribute('data-theme') || (systemDark() ? 'dark' : 'light'); }
+  try { var saved = localStorage.getItem('theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+  function label() { btn.textContent = current() === 'dark' ? 'light' : 'dark'; }
+  label();
+  btn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    label();
+  });
+
+  /* Photo: tries photo.jpg, then photo.png, then photo.webp; shows initials if none exist. */
+  var photoImg = document.getElementById('photoImg');
+  var photoBox = document.getElementById('photoBox');
+  var candidates = ['photo.png', 'photo.webp'];
+  photoImg.addEventListener('error', function () {
+    var next = candidates.shift();
+    if (next) { photoImg.src = next; } else { photoBox.classList.add('empty'); }
+  });
+  if (photoImg.complete && photoImg.naturalWidth === 0) { photoImg.dispatchEvent(new Event('error')); }
+
+  var copy = document.getElementById('copyBtn');
+  var email = document.getElementById('email');
+  copy.addEventListener('click', function () {
+    var text = email.textContent;
+    function done() { copy.textContent = 'copied'; setTimeout(function () { copy.textContent = 'copy'; }, 1500); }
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(email);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      copy.textContent = 'press copy';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } catch (e) { fallback(); }
+  });
+})();
+</script>
+
+</body></html>
